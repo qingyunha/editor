@@ -24,13 +24,32 @@ int main()
   //test();
   init();
   while(1){
-    i = 0;
     read_line();
     if(ind != 0)
       input();
     else{
-      ch = in[0];
+      i = 0;
+      ch = in[i];
       switch(ch){
+      case 't':
+	top();
+	break;
+
+      case 'u':
+	i++;
+	up();
+	break;
+
+      case 'n':
+	i++;
+	next();
+	break;
+
+      case 'l':
+	i++;
+	list();
+	break;
+
       case 'q':
 	quit();
 	return 0;
@@ -41,7 +60,7 @@ int main()
 
       default:
 	strcpy(in, "?!");
-	i = 3;
+	i = 2;
 	write_line();
       }//switch
     }//else
@@ -58,18 +77,18 @@ void init(){
   bp = tp = NULL;
   kp = qp = NULL;
   
-  fp = (TextL)malloc(10*sizeof(struct Text));
+  fp = (TextL)malloc(MAXLINE*sizeof(struct Text));
   fp[0].pre = NULL;
-  fp[9].next = NULL;
-  for(i = 0; i < 9; i++)
+  fp[MAXLINE-1].next = NULL;
+  for(i = 0; i < MAXLINE-1; i++)
     fp[i].next = &fp[i+1];
   
-  for(i = 9; i > 0; i--)
+  for(i = MAXLINE-1; i > 0; i--)
     fp[i].pre = &fp[i-1];
 }
 
 void read_line(){
-  in[0] = ' ';
+  memset(in, 0, LINESIZE);
   i = 0;
   while(1){
     read(0, buf, 1);
@@ -85,7 +104,6 @@ void read_line(){
       break;
 
     case '\n':
-      //      printf("IN(%d): %s\n", i, in);
       if(i == 0)
     	in[i++] = '\n';
       return;
@@ -148,7 +166,7 @@ void go_edit()
 {
   ind = 0;
   strcpy(in, "EDIT");
-  i = 5;
+  i = 4;
   write_line();
 }
 
