@@ -50,12 +50,26 @@ int main()
 	list();
 	break;
 
+      case 'c':
+	i++;
+	copy();
+	break;
+
+      case 'i':
+	insert();
+	break;
+
       case 'q':
 	quit();
 	return 0;
 	
       case 'e':
 	enter();
+	break;
+
+      case 'd':
+	i++;
+	delete();
 	break;
 
       default:

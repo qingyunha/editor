@@ -9,11 +9,16 @@ void insert_chain();
 void enter();
 void quit();
 
+int get_number();
 void top();
 void up();
 void next();
 void list();
-int get_number();
+void delete();
+void delete_line();
+void copy_line();
+void copy();
+
 
 void test();
 
@@ -34,10 +39,13 @@ int i;
 
 char buf[LINESIZE];
 
-TextL bp, tp;
-TextL kp, qp;
-TextL fp;
-TextL xp, yp;
+TextL bp, tp; //current, text 
+TextL kp, qp; //work first line, work last line
+TextL fp;     //free 
+
+
+TextL xp, yp; //temp  
+TextL sp;     //temp
 
 int ctr;
 int num;
