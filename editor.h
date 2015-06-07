@@ -38,6 +38,7 @@ char in[LINESIZE];
 int i;
 
 char buf[LINESIZE];
+char mat[LINESIZE];
 
 TextL bp, tp; //current, text 
 TextL kp, qp; //work first line, work last line

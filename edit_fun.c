@@ -295,3 +295,86 @@ void insert()
   
   insert_chain();
 }
+
+
+void store(){
+  if(get_number()==1)
+    return;
+  ctr = num;
+
+  if(bp == NULL){
+    if(tp == NULL){
+      strcpy(in, "notext");
+      i = 6;
+      write_line();
+      return;
+    }
+    else
+      bp = tp;
+  }
+  delete_link();
+  yp->pre = qp;
+  if(qp == NULL)
+    kp = yp;
+  else
+    qp->next = yp;
+
+  xp->next = NULL;
+}
+
+int get_string(){
+  if(in[i] != ' '){
+    strcpy(in, "?!");
+    i = 2;
+    write_line();
+    return 1;
+  }
+  
+  strcpy(mat,in+i+1);
+  return 0;
+}
+
+int  comp(){
+  return strncmp(mat, in+i, strlen(mat));
+}
+
+
+void find(){
+  if(get_string()==1)
+    return;
+
+  if(tp == NULL){
+    strcpy(in, "notext");
+    i = 6;
+    write_line();
+    return;
+  }
+
+  if(bp == NULL)
+    bp = tp;
+
+  while(1){
+    strcpy(in, bp->text);
+    i = 0;
+
+    while(1){
+      if(comp()==0){
+	i = strlen(in);
+	write_line();
+	return;
+      }else
+	i++;
+      
+      if(i >= LINESIZE)
+	break;
+    }
+
+    if(bp->next != NULL)
+      bp = bp->next;
+    else
+      break;
+  }
+  strcpy(in, "eof");
+  i = 3;
+  write_line();
+}

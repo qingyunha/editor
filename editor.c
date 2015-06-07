@@ -5,19 +5,6 @@
 #include "editor.h"
 
 
-int cmp, chg, err;
-int ind;
-char in[LINESIZE];
-int i;
-
-char buf[LINESIZE];
-
-TextL bp, tp;
-TextL kp, qp;
-TextL fp;
-TextL xp, yp;
-
-
 int main()
 {
   char ch;
@@ -70,6 +57,11 @@ int main()
       case 'd':
 	i++;
 	delete();
+	break;
+
+      case 'f':
+	i++;
+	find();
 	break;
 
       default:
