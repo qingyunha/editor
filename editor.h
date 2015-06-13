@@ -18,7 +18,9 @@ void delete();
 void delete_line();
 void copy_line();
 void copy();
-
+int get_string();
+int get_string1();
+int get_string2();
 
 void test();
 
@@ -39,6 +41,7 @@ int i;
 
 char buf[LINESIZE];
 char mat[LINESIZE];
+char rep[LINESIZE];
 
 TextL bp, tp; //current, text 
 TextL kp, qp; //work first line, work last line

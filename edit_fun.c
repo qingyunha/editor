@@ -334,6 +334,37 @@ int get_string(){
   return 0;
 }
 
+int get_string1(){
+  if(in[i] != ' '){
+    strcpy(in, "?!");
+    i = 2;
+    write_line();
+    return 1;
+  }
+  
+  int j;
+  for(j=0, i++; in[i] != 0 && in[i] != '/' && j < LINESIZE; j++,i++)
+    mat[j] = in[i];
+  mat[j+1] = '\0';
+  return 0;
+ }
+
+int get_string2(){
+  if(in[i] != '/'){
+    strcpy(in, "?!");
+    i = 2;
+    write_line();
+    return 1;
+  }
+  int j;
+  for(j=0, i++; in[i] != 0 && in[i] != '/' && j < LINESIZE; j++,i++)
+    rep[j] = in[i];
+
+  rep[j+1] = '\0';
+  in[i] = ' ';
+  return 0;
+}
+
 int  comp(){
   return strncmp(mat, in+i, strlen(mat));
 }
@@ -377,4 +408,53 @@ void find(){
   strcpy(in, "eof");
   i = 3;
   write_line();
+}
+
+
+void replace()
+{
+  if(get_string1()==1 || get_string2()==1 || get_number()==1)
+    return;
+
+  if(bp == NULL){
+    if(tp == NULL){
+      strcpy(in,"notext");
+      i = 6;
+      write_line();
+      return;
+    }
+    else
+      bp = tp;
+  }
+
+  int j, k;
+  char temp[LINESIZE];
+  ctr = num;
+  while(ctr > 0){
+    strcpy(in, bp->text);
+    i = 0;
+    k = strlen(mat);
+    j = strlen(in);
+    while(j - i >= strlen(mat)){
+      if(comp()==0){
+	strcpy(temp, in+i+k);
+	strcpy(bp->text+i, rep);
+	strcat(bp->text+i+strlen(rep),temp);
+	ctr--;
+	i = j;
+	write_line();
+	break;
+      }else
+	i++;
+    }
+
+    bp = bp->next;
+    if(bp == NULL){
+        strcpy(in, "eof");
+	i = 3;
+	write_line();
+	return;
+    }
+    
+  }
 }

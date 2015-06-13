@@ -64,6 +64,11 @@ int main()
 	find();
 	break;
 
+      case 'r':
+	i++;
+	replace();
+	break;
+
       default:
 	strcpy(in, "?!");
 	i = 2;
